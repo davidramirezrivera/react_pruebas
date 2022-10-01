@@ -33,7 +33,7 @@ module.exports = {// se colocara cada configuracion necesaria para nuestro proye
                 ]
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.(css|scss)$/,
                 use:[
                     'style-loader',
                     'css-loader',
