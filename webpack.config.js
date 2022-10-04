@@ -9,7 +9,8 @@ module.exports = {// se colocara cada configuracion necesaria para nuestro proye
         path: path.resolve(__dirname,'dist'), // averigua en donde nos encontramos y luego crea una carpeta en donde vivira el proyecto
         //__dirname es la que indica en que carpeta nos encontramos 
         // dist es la carpeta que se creara en donde vive el proyecto
-        filename: 'bundle.js' // nombre al empaquetado que se va a crear
+        filename: 'bundle.js', // nombre al empaquetado que se va a crear
+        publicPath:'/',
     },
     mode: 'development',
     resolve:{
@@ -57,5 +58,6 @@ module.exports = {// se colocara cada configuracion necesaria para nuestro proye
           },
         compress: true,
         port: 3005,
+        historyApiFallback: true,
       }
 }
