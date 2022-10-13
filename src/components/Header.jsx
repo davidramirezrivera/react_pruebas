@@ -1,13 +1,29 @@
-import React from "react";
+import React, {useState, useContext} from "react";
 import '../styles/Header.scss'
+import MyOrder from '@containers/MyOrder'
+import Menu  from '@components/MenuDesk';
+import IconMenu from '@icons/icon_menu.svg';
+import LogoYardS from '@logos/logo_yard_sale.svg'
+import AppContext from "../context/AppContext";
+import IconShpCart from '@icons/icon_shopping_cart.svg';
+
 
 const Header = () => {
+    const [toggle, setToogle] = useState(false);
+    const [toggleOrders, setToggleOrders] = useState(false);
+    const {state} = useContext(AppContext);
+
+    const handleToggle = () => {
+        setToogle(!toggle);
+    }
+
+
     return(
         <nav>
-            <img src="./icons/icon_menu.svg" alt="menu" className="menu" />
+            <img src={IconMenu} alt="menu" className="menu" />
 
             <div className="navbar-left">
-                <img src="./logos/logo_yard_sale.svg" alt="logo" className="logo" />
+                <img src={LogoYardS} alt="logo" className="logoYards" />
 
                 <ul>
                     <li>
@@ -33,13 +49,18 @@ const Header = () => {
 
             <div className="navbar-right">
                 <ul>
-                    <li className="navbar-email">platzi@example.com</li>
-                    <li className="navbar-shopping-cart">
-                        <img src="./icons/icon_shopping_cart.svg" alt="shopping cart" />
-                        <div>2</div>
+                    <li className="navbar-email" onClick={handleToggle}>
+                        platzi@example.com
+                    </li>
+                    <li className="navbar-shopping-cart" onClick={()=>setToggleOrders(!toggleOrders)}>
+                        <img src={IconShpCart} alt="shopping cart" />
+                        {state.cart.length > 0 ? <div> {state.cart.length}</div> : null }
                     </li>
                 </ul>
             </div>
+            {toggle && <Menu/>} {/* si el toggle es true se mostrara el menu  */}
+            {toggleOrders && <MyOrder/>}
+            
         </nav>
     );
 }
